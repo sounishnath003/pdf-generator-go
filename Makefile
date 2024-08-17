@@ -2,7 +2,9 @@
 .PHONY: build run install-deps test-pdfgen
 
 install-deps:
-	clear
+	go mod tidy
+	go mod download
+	go mod verify
 
 build:
 	go build -o dist/gooferr cmd/main.go 
