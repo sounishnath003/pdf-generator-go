@@ -21,6 +21,7 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, ctx echo.C
 func NewTemplateRender(e *echo.Echo, paths ...string) {
 	tmpl := &template.Template{}
 
+	// Process the variadic passes in the arguments paths
 	for _, path := range paths {
 		template.Must(tmpl.ParseGlob(path))
 	}

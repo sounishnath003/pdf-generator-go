@@ -9,16 +9,42 @@
   </head>
   <body>
     <div>
-      <h1>Index page</h1>
-      <p>Hello, From Index Page</p>
-      <p>Badass: {{.BadAss}}</p>
-    </div>
-    <div>
-      <a href="/generate-report"
-        ><button class="px-5 py-3 rounded-lg bg-blue-600 text-xl">
-          Generate Report
-        </button></a
+      <!-- This is an example component -->
+      <div
+        class="flex items-center justify-center min-h-screen from-green-100 via-green-300 to-green-500 bg-gradient-to-br"
       >
+        <div
+          class="w-full max-w-lg px-10 py-8 mx-auto bg-white rounded-lg shadow-xl"
+        >
+          <div class="max-w-md mx-auto space-y-6">
+            <div class="text-3xl text-center">Manani Sales Report</div>
+
+            <p class="text-gray-600">
+              Simplified and effective way to generate the sales report.
+            </p>
+
+            <div class="text-base leading-7">
+              <p class="font-medium text-gray-700">Looking For Repository?</p>
+
+              <p>
+                <a
+                  target="_blank"
+                  href="https://github.com/sounishnath003/salesreport-generation-go"
+                  class="text-green-400 hover:underline"
+                  >Check out github repository &rarr;</a
+                >
+              </p>
+            </div>
+
+            <a
+              href="/generate-report"
+              class="block w-full px-4 py-2 font-medium tracking-wide text-center text-white transition-colors duration-200 transform bg-green-400 rounded-md hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-300 focus:ring-opacity-80"
+            >
+              Generate Report as on {{.Date}}
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

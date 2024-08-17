@@ -34,6 +34,7 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 ## Inspired by
 
 - [@github/moroz/Pdf-Generator-Video](https://github.com/moroz/pdf-generation-video/) : Which uses the LateX to generate the PDF files.
+- [Learn Blog creation with Htmx and Go](https://medium.com/gravel-engineering/this-blogpost-also-posted-in-my-personal-blog-which-you-can-access-here-dd856c61001)
 
 ## Benefits
 

@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	"github.com/sounishnath003/pdf-generator-go/internal/handlers"
 	"github.com/sounishnath003/pdf-generator-go/internal/htmx"
 )
 
@@ -20,6 +20,7 @@ func main() {
 
 	// Little bit of middleware housekeeping
 	e.Use(middleware.CSRF())
+	e.Pre(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Pre(middleware.RemoveTrailingSlash())
 
@@ -27,17 +28,9 @@ func main() {
 	htmx.NewTemplateRender(e, "public/*.html")
 
 	// Create single SSR endpoints to generate the Pdf Reports
-	e.GET("/", func(ctx echo.Context) error {
-		return ctx.Render(http.StatusOK, "index", map[string]string{
-			"BadAss": "Batch",
-		})
-	})
-
-	e.GET("/generate-report", func(ctx echo.Context) error {
-		return ctx.Render(http.StatusOK, "sales_report", map[string]string{
-			"AuthorName": "Sounish Nath",
-		})
-	})
+	e.GET("/", handlers.HandleIndexPage)
+	// Report Generation Endpoint
+	e.GET("/generate-report", handlers.HandleReportGeneration)
 
 	log.Printf("server is up and running on port http://%s:%s/\n", PublicHost, Port)
 	e.Logger.Panic(e.Start(fmt.Sprintf(":%s", Port)))
