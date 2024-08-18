@@ -1,11 +1,13 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 	"time"
 
 	"github.com/labstack/echo"
 	"github.com/sounishnath003/pdf-generator-go/internal/models"
+	"github.com/sounishnath003/pdf-generator-go/internal/service"
 )
 
 func HandleIndexPage(ctx echo.Context) error {
@@ -18,9 +20,7 @@ func HandleIndexPage(ctx echo.Context) error {
 }
 
 func HandleReportGeneration(ctx echo.Context) error {
-	data := models.ReportGenerationModel{
-		Name:       "sales_report",
-		AuthorName: "Sounish Nath",
-	}
+	data := service.GenerateLatestSalesReport()
+	log.Println("latest.data", data)
 	return ctx.Render(http.StatusOK, data.Name, &data)
 }

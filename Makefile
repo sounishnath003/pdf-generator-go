@@ -7,7 +7,7 @@ install-deps:
 	go mod verify
 
 build:
-	go build -o dist/gooferr cmd/main.go 
+	go build -o dist/gooferr cmd/*.go 
 
 run: build
 	dist/gooferr

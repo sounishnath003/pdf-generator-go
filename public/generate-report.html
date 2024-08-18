@@ -1,3 +1,4 @@
+{{define "sales_report"}}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,12 +8,117 @@
     <script defer src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    {{define "sales_report"}}
-    <div>
-      <h1>Sales report generator page</h1>
-      <p>Hello, World!</p>
-      <p>Hello, from {{.AuthorName}}</p>
+    <div class="h-2 top-0 bg-green-400"></div>
+    <div
+      class="max-w-4xl m-auto mx-auto my-10 p-2 flex flex-col space-y-8 items-center justify-center"
+    >
+      <div class="flex flex-col space-y-4 text-center">
+        <div>
+          <div class="text-2xl">
+            {{.Heading.Heading1}}
+            <span class="text-blue-600 font-bold"> {{.ShopName}} </span>
+            ANNEXURE-15
+          </div>
+        </div>
+        <div>
+          <div class="text-xl font-semibold">
+            {{.Heading.Heading2}}
+            <span class="text-blue-600 uppercase"> {{.CashCreditBank}} </span>
+          </div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold underline">
+            {{.Heading.Heading3}}
+            <span class="text-blue-600 uppercase">{{.Date}}</span>
+          </div>
+        </div>
+      </div>
+
+      <table id="tableInfo" class="bg-white shadow-md rounded-xl w-full">
+        <thead>
+          <tr class="bg-blue-gray-100 text-gray-700">
+            <th class="py-3 px-4 text-left">
+              Particulars of goods hypothecated
+            </th>
+            <th class="py-3 px-4 text-left">Price (INR)</th>
+            <th class="py-3 px-4 text-left">Quantity (pics)</th>
+            <th class="py-3 px-4 text-left">Total (INR)</th>
+          </tr>
+        </thead>
+        <tbody class="text-blue-gray-900">
+          <tr class="border-b border-blue-gray-200 odd:bg-gray-100">
+            <td class="py-3 px-4">Company A</td>
+            <td class="py-3 px-4">₹50.25</td>
+            <td class="py-3 px-4">100</td>
+            <td class="py-3 px-4">₹5025.00</td>
+          </tr>
+
+          <tr class="border-b border-blue-gray-200 odd:bg-gray-100">
+            <td class="py-3 px-4">Company B</td>
+            <td class="py-3 px-4">₹75.60</td>
+            <td class="py-3 px-4">150</td>
+            <td class="py-3 px-4">₹11340.00</td>
+          </tr>
+          <tr class="border-b border-blue-gray-200 odd:bg-gray-100">
+            <td class="py-3 px-4">Company C</td>
+            <td class="py-3 px-4">₹30.80</td>
+            <td class="py-3 px-4">200</td>
+            <td class="py-3 px-4">₹6160.00</td>
+          </tr>
+          <!-- Add more rows as needed -->
+          <tr class="border-b border-blue-gray-200">
+            <td class="py-3 px-4 font-medium">Total Amount:</td>
+            <td class="py-3 px-4"></td>
+            <td class="py-3 px-4"></td>
+            <td class="py-3 px-4 text-xl font-bold text-blue-600">
+              ₹22,525.00
+            </td>
+          </tr>
+          <tr class="border-b border-blue-gray-200">
+            <td class="py-3 px-4 font-medium">
+              Less margin as per agreement @
+              <span class="text-blue-600">{{.PercentageLess}}</span>&percnt;
+            </td>
+            <td class="py-3 px-4"></td>
+            <td class="py-3 px-4"></td>
+            <td class="py-3 px-4 text-xl font-medium text-blue-600">
+              - ₹3,525.00
+            </td>
+          </tr>
+          <tr class="border-b border-blue-gray-200">
+            <td class="py-3 px-4 font-medium">Net Drawing Power:</td>
+            <td class="py-3 px-4"></td>
+            <td class="py-3 px-4"></td>
+            <td class="py-3 px-4 text-xl font-bold text-blue-600">
+              ₹13,525.00
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="bg-yellow-300 font-bold px-3 rounded-lg py-2">
+        Work in progress
+      </div>
     </div>
-    {{end}}
+
+    <div class="w-full pt-5 px-4 mb-8 mx-auto">
+      <div class="text-sm text-gray-700 py-1 text-center">
+        Made with ❤️ using
+        <a
+          class="text-gray-700 font-semibold"
+          href="https://github.com/sounishnath003/salesreport-generation-go"
+          target="_blank"
+          >Htmx + Golang</a
+        >
+        by
+        <a
+          href="https://www.linkedin.com/in/sounishnath/"
+          class="ttext-blue-600 font-semibold underline"
+          target="_blank"
+        >
+          {{.AuthorName}}</a
+        >.
+      </div>
+    </div>
   </body>
 </html>
+{{end}}

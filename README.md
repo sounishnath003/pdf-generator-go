@@ -8,24 +8,36 @@ This project aims to create a web application that generates sales reports based
 - The index page has been created with a simple layout and a button to navigate to the sales report generator page.
 - The sales report generator page has been created with a basic layout and placeholder text.
 - The project includes a template engine to dynamically render data on the pages.
+- A database has been integrated to store sales data and user information.
+- A form has been developed on the sales report generator page to collect user input for generating reports.
+- Logic has been implemented to generate sales reports based on user input and display the report on the page.
+
+## Screenshots
+
+- Homepage UI:
+  ![Homepage UI](assets/homepage.png)
+- Sales Report Generator UI:
+  ![Sales Report Generator UI](assets/report.png)
 
 ## Future Development
 
-- Implement user authentication and authorization to ensure only authorized users can access the sales report generator.
-- Integrate a database to store sales data and user information.
-- Develop a form on the sales report generator page to collect user input for generating reports.
-- Implement logic to generate sales reports based on user input and display the report on the page.
 - Add more features to the report generator, such as filtering and sorting options.
+- Implement PDF generation for reports.
 - Test and deploy the application.
+- Enhance user experience with additional visualizations and interactive elements.
 
 ## How to run
 
-- Locally
+- Install dependencies
+    ```bash
+    make install-deps
+    ```
 
-```bash
-make install-deps
-make run
-```
+- Run locally
+    ```bash
+    make run
+    ```
+
 
 ## Contributing
 

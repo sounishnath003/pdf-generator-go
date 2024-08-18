@@ -10,12 +10,10 @@ import (
 	"github.com/sounishnath003/pdf-generator-go/internal/htmx"
 )
 
-const (
-	PublicHost = "localhost"
-	Port       = "3000"
-)
+var Envs = InitEnvs()
 
 func main() {
+	log.Printf("loading.env:%v\n", Envs)
 	e := echo.New()
 
 	// Little bit of middleware housekeeping
@@ -32,6 +30,6 @@ func main() {
 	// Report Generation Endpoint
 	e.GET("/generate-report", handlers.HandleReportGeneration)
 
-	log.Printf("server is up and running on port http://%s:%s/\n", PublicHost, Port)
-	e.Logger.Panic(e.Start(fmt.Sprintf(":%s", Port)))
+	log.Printf("server is up and running on port http://%s:%s/\n", Envs.PublicHost, Envs.Port)
+	e.Logger.Panic(e.Start(fmt.Sprintf(":%s", Envs.Port)))
 }
