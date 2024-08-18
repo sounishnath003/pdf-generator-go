@@ -53,3 +53,17 @@ func Sum(vals ...int) int {
 	}
 	return t
 }
+
+// Converts following examples
+//
+// 123109 -> 1,23,109.00
+//
+// 1209.98 -> 1,209.98
+//
+// 121 -> 121.00
+//
+// use currency https://pkg.go.dev/golang.org/x/text/currency
+func numberToINRCurrency(val interface{}) string {
+	// TODO:
+	return ""
+}

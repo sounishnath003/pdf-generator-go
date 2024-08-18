@@ -59,6 +59,11 @@ func GenerateLatestSalesReport() *models.ReportGenerationModel {
 	if err != nil {
 		panic(err)
 	}
+	totalAmount := calculateTotalAmount(products)
+	percentageLess := 25
+	grossDiscount := float64(totalAmount) * float64(percentageLess) / 100.0
+	amountAfterDiscount := float64(totalAmount) - (grossDiscount)
+
 	return &models.ReportGenerationModel{
 		Name:           "sales_report",
 		Date:           time.Now().Format("January-2006"),
@@ -69,10 +74,12 @@ func GenerateLatestSalesReport() *models.ReportGenerationModel {
 			Heading2: "CASH CREDIT ACCOUNT With",
 			Heading3: "STATEMENT OF ASSETS / STOCKS HYPOTHDCATED AS NO",
 		},
-		PercentageLess: 25,
-		Products:       products,
-		TotalAmount:    calculateTotalAmount(products),
-		AuthorName:     "Sounish Nath",
+		PercentageLess:      int8(percentageLess),
+		Products:            products,
+		TotalAmount:         totalAmount,
+		AmountAfterDiscount: amountAfterDiscount,
+		GrossDiscountAmount: grossDiscount,
+		AuthorName:          "Sounish Nath",
 	}
 }
 
