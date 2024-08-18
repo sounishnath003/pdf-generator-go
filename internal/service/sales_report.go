@@ -27,7 +27,7 @@ func getProductCatalog() ([]models.MananiProduct, error) {
 		{
 			ID:          1,
 			ProductName: "Saree",
-			Quantity:    generateRandomNumber(20, 70),
+			Quantity:    generateRandomNumber(92, 160),
 			Price:       generateRandomNumber(810, 1900),
 		},
 		{
@@ -38,15 +38,57 @@ func getProductCatalog() ([]models.MananiProduct, error) {
 		},
 		{
 			ID:          3,
-			ProductName: "Churidar pics",
+			ProductName: "Churidar Piece",
 			Quantity:    generateRandomNumber(20, 70),
 			Price:       generateRandomNumber(1500, 2300),
 		},
 		{
 			ID:          4,
-			ProductName: "Womens' Jens",
-			Quantity:    generateRandomNumber(20, 70),
-			Price:       generateRandomNumber(1500, 2300),
+			ProductName: "Fancy Sarees",
+			Quantity:    generateRandomNumber(60, 130),
+			Price:       generateRandomNumber(1800, 2600),
+		},
+		{
+			ID:          5,
+			ProductName: "Churidar",
+			Quantity:    generateRandomNumber(110, 180),
+			Price:       generateRandomNumber(1300, 2300),
+		},
+		{
+			ID:          6,
+			ProductName: "Kurti",
+			Quantity:    generateRandomNumber(60, 110),
+			Price:       generateRandomNumber(500, 1280),
+		},
+		{
+			ID:          7,
+			ProductName: "Bed Sheets",
+			Quantity:    generateRandomNumber(5, 13),
+			Price:       generateRandomNumber(1000, 2000),
+		},
+		{
+			ID:          8,
+			ProductName: "Sweaters",
+			Quantity:    generateRandomNumber(5, 13),
+			Price:       generateRandomNumber(400,980),
+		},
+		{
+			ID:          9,
+			ProductName: "Winter Garments",
+			Quantity:    generateRandomNumber(13, 30),
+			Price:       generateRandomNumber(820, 1600),
+		},
+		{
+			ID:          10,
+			ProductName: "Cosmetics & Miscellaneous",
+			Quantity:    generateRandomNumber(13, 30),
+			Price:       generateRandomNumber(820, 1600),
+		},
+		{
+			ID:          11,
+			ProductName: "Others",
+			Quantity:    generateRandomNumber(60,100),
+			Price:       generateRandomNumber(2000, 4000),
 		},
 	}, nil
 }

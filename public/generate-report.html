@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manani | Sales Report App</title>
+    <title>Manani Sales Report App</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
@@ -15,7 +15,7 @@
         -webkit-print-color-adjust: exact;
       }
     </style>
-    <div class="h-2 top-0 bg-green-200"></div>
+    <div class="h-1 top-0 bg-green-300"></div>
     <div class="flex mx-auto justify-center items-center my-4">
       <img
         class="rounded-full w-32 text-center"
@@ -41,8 +41,10 @@
           </div>
           <div>
             <div class="font-medium underline">
-              {{.Heading.Heading3}}
-              <span class="text-blue-600 uppercase">{{.Date}}</span>
+              {{.Heading.Heading3}} -
+              <span class="text-blue-600 uppercase font-semibold"
+                >{{.Date}}</span
+              >
             </div>
           </div>
         </div>
@@ -69,7 +71,9 @@
               <td class="py-3 px-4 text-left">{{$product.ProductName}}</td>
               <td class="py-3 px-4">₹{{$product.Price}}</td>
               <td class="py-3 px-4">{{$product.Quantity}}</td>
-              <td class="py-3 px-4 font-semibold">₹{{ $product.Price}}</td>
+              <td class="py-3 px-4 font-semibold">
+                ₹{{ (mul $product.Price $product.Quantity) }}
+              </td>
             </tr>
             {{end}}
 
@@ -92,7 +96,7 @@
               <td class="py-3 px-4"></td>
               <td class="py-3 px-4"></td>
               <td class="py-3 px-4 font-medium text-blue-600">
-                - ₹{{.GrossDiscountAmount}}
+                ₹{{.GrossDiscountAmount}}
               </td>
             </tr>
             <tr class="border-b border-blue-gray-200">
@@ -142,28 +146,32 @@
     </div>
 
     <div class="w-full pt-5 px-4 mb-8 mx-auto">
-      <div class="text-sm text-gray-700 py-1 text-center">
-        Made with ❤️ using
-        <a
-          class="text-gray-700 font-semibold"
-          href="https://github.com/sounishnath003/salesreport-generation-go"
-          target="_blank"
-          >Htmx + Golang</a
-        >
-        by
-        <a
-          href="https://www.linkedin.com/in/sounishnath/"
-          class="ttext-blue-600 font-semibold underline"
-          target="_blank"
-        >
-          {{.AuthorName}}</a
-        >. |
-        <span class="px-3 rounded py-1 bg-yellow-300 font-medium"
-          >Work in progress</span
-        >|
-        <span class="px-3 rounded py-1 bg-green-300 font-medium">
-          <a href="{{.DownloadPathUri}}" download> Download Report </a>
-        </span>
+      <div
+        class="text-sm text-gray-700 py-1 text-center flex space-x-2 mx-auto justify-center items-center"
+      >
+        <div>
+          Made with ❤️ using
+          <a
+            class="text-gray-700 font-semibold"
+            href="https://github.com/sounishnath003/salesreport-generation-go"
+            target="_blank"
+            >Htmx + Golang</a
+          >
+          by
+          <a
+            href="https://www.linkedin.com/in/sounishnath/"
+            class="ttext-blue-600 font-semibold underline"
+            target="_blank"
+          >
+            {{.AuthorName}}</a
+          >.
+        </div>
+        <div>|</div>
+        <div class="px-2 rounded py-1 bg-green-100 font-medium">
+          <a href="{{.DownloadPathUri}}" download>
+            Download Generated Report
+          </a>
+        </div>
       </div>
     </div>
   </body>
