@@ -19,16 +19,24 @@ type MananiProduct struct {
 	Price       int    `json:"price"`
 }
 
+type Acknowlegement struct {
+	Norm    string `json:"domain"`
+	Details string `json:"details"`
+}
+
 type ReportGenerationModel struct {
-	Date                string          `json:"date"`
-	Name                string          `json:"name"`
-	ShopName            string          `json:"shopName"`
-	CashCreditBank      string          `json:"cashCreditBank"`
-	Heading             HeaderInfo      `json:"headerInfo"`
-	PercentageLess      int8            `json:"percentageLess"`
-	Products            []MananiProduct `json:"products"`
-	TotalAmount         int             `json:"totalAmount"`
-	AmountAfterDiscount float64         `json:"amountAfterDiscount"`
-	GrossDiscountAmount float64         `json:"grossDiscountAmount"`
-	AuthorName          string          `json:"authorName"`
+	Date                string           `json:"date"`
+	Name                string           `json:"name"`
+	ShopName            string           `json:"shopName"`
+	Propietor           string           `json:"propietor"`
+	CashCreditBank      string           `json:"cashCreditBank"`
+	Heading             HeaderInfo       `json:"headerInfo"`
+	PercentageLess      int8             `json:"percentageLess"`
+	Products            []MananiProduct  `json:"products"`
+	TotalAmount         int              `json:"totalAmount"`
+	AmountAfterDiscount float64          `json:"amountAfterDiscount"`
+	GrossDiscountAmount float64          `json:"grossDiscountAmount"`
+	AcknowlegmentRules  []Acknowlegement `json:"acknowledgementRules"`
+	AuthorName          string           `json:"authorName"`
+	DownloadPathUri     string           `json:"downloadUri"`
 }

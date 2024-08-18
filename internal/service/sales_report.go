@@ -64,10 +64,30 @@ func GenerateLatestSalesReport() *models.ReportGenerationModel {
 	grossDiscount := float64(totalAmount) * float64(percentageLess) / 100.0
 	amountAfterDiscount := float64(totalAmount) - (grossDiscount)
 
+	acknowledgementRules := []models.Acknowlegement{
+		{
+			Norm:    "Sole Ownership and No Encumbrances",
+			Details: "The assets listed in this statement are solely owned by the undersigned and are free from any liens, charges, or claims by any other party.",
+		},
+		{
+			Norm:    "Accurate Inventory Valuation",
+			Details: "The quantity and valuation of raw materials, work-in-progress, and finished goods as stated above represent a true and accurate reflection of the actual stock levels and their corresponding values as per the company's records.",
+		},
+		{
+			Norm:    "Fair Market Valuation",
+			Details: "The prices used to value the assets are the lowest of the market price, contract price, or controlled price, whichever is applicable.",
+		},
+		{
+			Norm:    "Adequate Insurance Coverage",
+			Details: "All assets listed in this statement are fully insured for their market value, and the relevant insurance policies are in force and held by the undersigned.",
+		},
+	}
+
 	return &models.ReportGenerationModel{
 		Name:           "sales_report",
 		Date:           time.Now().Format("January-2006"),
-		ShopName:       `"MANANI"`,
+		ShopName:       "MANANI",
+		Propietor:      "Mrs. Manisha Nath",
 		CashCreditBank: "State Bank of India - Ghatal Branch",
 		Heading: models.HeaderInfo{
 			Heading1: "Serial No. or the Stock Statement",
@@ -79,6 +99,7 @@ func GenerateLatestSalesReport() *models.ReportGenerationModel {
 		TotalAmount:         totalAmount,
 		AmountAfterDiscount: amountAfterDiscount,
 		GrossDiscountAmount: grossDiscount,
+		AcknowlegmentRules:  acknowledgementRules,
 		AuthorName:          "Sounish Nath",
 	}
 }

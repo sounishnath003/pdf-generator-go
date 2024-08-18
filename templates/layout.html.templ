@@ -1,100 +1,144 @@
+{{define "sales_report"}}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sales Report Generator</title>
+    <title>Manani | Sales Report App</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
     <style>
       @page {
         size: a4;
+        zoom: 50%;
         -webkit-print-color-adjust: exact;
       }
     </style>
-    <div class="h-2 top-0 bg-green-400"></div>
-    <div
-      class="max-w-4xl m-auto mx-auto my-10 p-2 flex flex-col space-y-8 items-center justify-center"
-    >
-      <div class="flex flex-col space-y-4 text-center">
-        <div>
-          <div class="font-medium">
-            {{.Heading.Heading1}}
-            <span class="text-blue-600 font-bold"> {{.ShopName}} </span>
-            ANNEXURE-15
+    <div class="h-2 top-0 bg-green-200"></div>
+    <div class="flex mx-auto justify-center items-center my-4">
+      <img
+        class="rounded-full w-32 text-center"
+        src="http://localhost:3000/public/logo.png"
+        alt="manani-logo"
+      />
+    </div>
+    <div class="max-w-4xl m-auto mx-auto my-4">
+      <div class="flex flex-col space-y-8 items-center justify-center">
+        <div class="flex flex-col space-y-4 text-center">
+          <div>
+            <div class="font-medium">
+              {{.Heading.Heading1}}
+              <span class="text-blue-600 font-bold"> "{{.ShopName}}" </span>
+              ANNEXURE-15
+            </div>
+          </div>
+          <div>
+            <div class="font-bold">
+              {{.Heading.Heading2}}
+              <span class="text-blue-600 uppercase"> {{.CashCreditBank}} </span>
+            </div>
+          </div>
+          <div>
+            <div class="font-medium underline">
+              {{.Heading.Heading3}}
+              <span class="text-blue-600 uppercase">{{.Date}}</span>
+            </div>
           </div>
         </div>
-        <div>
-          <div class="font-bold">
-            {{.Heading.Heading2}}
-            <span class="text-blue-600 uppercase"> {{.CashCreditBank}} </span>
-          </div>
+
+        <table
+          id="tableInfo"
+          class="bg-white shadow-md rounded-xl w-full px-4 md:px-0"
+        >
+          <thead>
+            <tr class="bg-blue-gray-100 text-gray-700">
+              <th class="py-3 px-4 text-left">SL.No</th>
+              <th class="py-3 px-4 text-left">
+                Particulars of goods hypothecated
+              </th>
+              <th class="py-3 px-4 text-left">Price (INR)</th>
+              <th class="py-3 px-4 text-left">Quantity (pics)</th>
+              <th class="py-3 px-4 text-left">Total (INR)</th>
+            </tr>
+          </thead>
+          <tbody class="text-blue-gray-900 text-sm">
+            {{range $product := .Products}}
+            <tr class="border-b border-blue-gray-200 odd:bg-gray-100">
+              <td class="py-3 px-4">{{$product.ID}}</td>
+              <td class="py-3 px-4 text-left">{{$product.ProductName}}</td>
+              <td class="py-3 px-4">₹{{$product.Price}}</td>
+              <td class="py-3 px-4">{{$product.Quantity}}</td>
+              <td class="py-3 px-4 font-semibold">₹{{ $product.Price}}</td>
+            </tr>
+            {{end}}
+
+            <!-- Add more rows as needed -->
+            <tr class="border-b border-blue-gray-200">
+              <td class="py-3 px-4"></td>
+              <td class="py-3 px-4 font-medium">Total Amount:</td>
+              <td class="py-3 px-4"></td>
+              <td class="py-3 px-4"></td>
+              <td class="py-3 px-4 font-bold text-blue-600">
+                ₹{{.TotalAmount}}
+              </td>
+            </tr>
+            <tr class="border-b border-blue-gray-200">
+              <td class="py-3 px-4"></td>
+              <td class="py-3 px-4 font-medium">
+                Less margin as per agreement @
+                <span class="text-blue-600">{{.PercentageLess}}</span>&percnt;
+              </td>
+              <td class="py-3 px-4"></td>
+              <td class="py-3 px-4"></td>
+              <td class="py-3 px-4 font-medium text-blue-600">
+                - ₹{{.GrossDiscountAmount}}
+              </td>
+            </tr>
+            <tr class="border-b border-blue-gray-200">
+              <td class="py-3 px-4"></td>
+              <td class="py-3 px-4 font-medium">Net Drawing Power:</td>
+              <td class="py-3 px-4"></td>
+              <td class="py-3 px-4"></td>
+              <td class="py-3 px-4 font-bold text-blue-600">
+                ₹{{ .AmountAfterDiscount}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-xl font-medium underline">Acknowledgements</div>
+      </div>
+      <div class="my-10 justify-start mx-6 md:mx-auto">
+        <div class="text-left font-semibold text-blue-800">
+          I/We certify following mentioned points -
         </div>
-        <div>
-          <div class="font-medium underline">
-            {{.Heading.Heading3}}
-            <span class="text-blue-600 uppercase">{{.Date}}</span>
-          </div>
+        <div class="my-2 px-2">
+          <ul class="list-decimal">
+            {{range $rule := .AcknowlegmentRules}}
+            <li class="text-gray-700">
+              <span class="text-gray-800 font-semibold"> {{$rule.Norm}}: </span>
+              {{$rule.Details}}
+            </li>
+            {{end}}
+          </ul>
         </div>
       </div>
 
-      <table id="tableInfo" class="bg-white shadow-md rounded-xl w-full">
-        <thead>
-          <tr class="bg-blue-gray-100 text-gray-700">
-            <th class="py-3 px-4 text-left">SL.No</th>
-            <th class="py-3 px-4 text-left">
-              Particulars of goods hypothecated
-            </th>
-            <th class="py-3 px-4 text-left">Price (INR)</th>
-            <th class="py-3 px-4 text-left">Quantity (pics)</th>
-            <th class="py-3 px-4 text-left">Total (INR)</th>
-          </tr>
-        </thead>
-        <tbody class="text-blue-gray-900 text-sm">
-          {{range $product := .Products}}
-          <tr class="border-b border-blue-gray-200 odd:bg-gray-100">
-            <td class="py-3 px-4">{{$product.ID}}</td>
-            <td class="py-3 px-4 text-left">{{$product.ProductName}}</td>
-            <td class="py-3 px-4">₹{{$product.Price}}</td>
-            <td class="py-3 px-4">{{$product.Quantity}}</td>
-            <td class="py-3 px-4">
-              ₹{{ (mul $product.Price $product.Quantity) }}
-            </td>
-          </tr>
-          {{end}}
-
-          <!-- Add more rows as needed -->
-          <tr class="border-b border-blue-gray-200">
-            <td class="py-3 px-4"></td>
-            <td class="py-3 px-4 font-medium">Total Amount:</td>
-            <td class="py-3 px-4"></td>
-            <td class="py-3 px-4"></td>
-            <td class="py-3 px-4 font-bold text-blue-600">₹{{.TotalAmount}}</td>
-          </tr>
-          <tr class="border-b border-blue-gray-200">
-            <td class="py-3 px-4"></td>
-            <td class="py-3 px-4 font-medium">
-              Less margin as per agreement @
-              <span class="text-blue-600">{{.PercentageLess}}</span>&percnt;
-            </td>
-            <td class="py-3 px-4"></td>
-            <td class="py-3 px-4"></td>
-            <td class="py-3 px-4 font-medium text-blue-600">
-              - ₹{{.GrossDiscountAmount}}
-            </td>
-          </tr>
-          <tr class="border-b border-blue-gray-200">
-            <td class="py-3 px-4"></td>
-            <td class="py-3 px-4 font-medium">Net Drawing Power:</td>
-            <td class="py-3 px-4"></td>
-            <td class="py-3 px-4"></td>
-            <td class="py-3 px-4 font-bold text-blue-600">
-              ₹{{ .AmountAfterDiscount}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="mt-32 flex flex-row justify-between items-center">
+        <div class="m-auto w-full">
+          Date: <span class="font-semibold text-blue-600">{{.Date}}</span>
+        </div>
+        <div
+          class="m-auto w-full flex justify-between items-center flex flex-col space-y-2"
+        >
+          <div class="w-full border border-b border-dashed border-black"></div>
+          <div class="font-semibold">
+            Proprietor:
+            <span class="text-blue-600">{{.Propietor}}</span>
+          </div>
+          <div class="font-semibold">Account: 33484359688</div>
+        </div>
+      </div>
     </div>
 
     <div class="w-full pt-5 px-4 mb-8 mx-auto">
@@ -116,8 +160,12 @@
         >. |
         <span class="px-3 rounded py-1 bg-yellow-300 font-medium"
           >Work in progress</span
-        >
+        >|
+        <span class="px-3 rounded py-1 bg-green-300 font-medium">
+          <a href="{{.DownloadPathUri}}" download> Download Report </a>
+        </span>
       </div>
     </div>
   </body>
 </html>
+{{ end }}

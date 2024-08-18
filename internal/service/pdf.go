@@ -50,21 +50,25 @@ var chromeFlags = []string{
 }
 
 // GeneratePdfFromSource helps to generate the PDF and Html file as per the requiremenet and bytes of data.
-func GeneratePdfFromSource(url string, source []byte) ([]byte, error) {
-	tmpDir := os.TempDir()
+func GeneratePdfFromSource(source []byte) (string, error) {
+	// tmpDir := os.TempDir()
+	tmpDir, err := os.Getwd()
+	if err := os.MkdirAll(tmpDir+"temp", 0o755); err != nil {
+		return "", err
+	}
 	tmpFileId := generateIdForFileName()
 
-	htmlFile := path.Join(tmpDir, "tmp", tmpFileId+".html")
-	pdfFile := path.Join(tmpDir, "tmp", tmpFileId+".pdf")
+	htmlFile := path.Join(tmpDir, "temp", tmpFileId+".html")
+	pdfFile := path.Join(tmpDir, "temp", tmpFileId+".pdf")
+	publicPdfFile := fmt.Sprintf("/export/%s.pdf", tmpFileId)
 
+	os.WriteFile(htmlFile, source, 0o644)
 	log.Printf("generated.htmlFile.name: %s", htmlFile)
 	log.Printf("generated.pdfFile.name: %s", pdfFile)
 
 	// Setting up the necessary runtime args for the google chrome
-	args := append(chromeFlags, fmt.Sprintf(`--print-to-pdf %s`, url))
+	args := append(chromeFlags, fmt.Sprintf(`--print-to-pdf=%s`, pdfFile), htmlFile)
 	log.Printf("runtime.chrome.flags: %s\n", args)
-
-	os.WriteFile(htmlFile, source, 0o600)
 
 	outBuf := bytes.NewBuffer([]byte{})
 
@@ -72,18 +76,17 @@ func GeneratePdfFromSource(url string, source []byte) ([]byte, error) {
 	cmd.Stderr = outBuf
 	cmd.Stdout = outBuf
 
-	err := cmd.Run()
+	err = cmd.Run()
 	if err != nil {
 		log.Printf("an error occured %v\n", err)
-		return nil, errors.New(outBuf.String())
+		return "", errors.New(outBuf.String())
 	}
 
-	return os.ReadFile(htmlFile)
+	return publicPdfFile, nil
 }
 
 func generateIdForFileName() string {
-	bytes := make([]byte, 8)
+	bytes := make([]byte, 6)
 	rand.Read(bytes)
-
 	return fmt.Sprintf("%#x", bytes)[2:]
 }
