@@ -7,6 +7,7 @@ install-deps:
 	go mod verify
 
 build:
+	rm -fr dist
 	cp public/generate-report.html templates/layout.html.templ
 	go build -o dist/gooferr cmd/*.go 
 
