@@ -1,0 +1,31 @@
+name: Release and Tag
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: ["1.23.x", "1.20.x"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and create release
+        run: |
+          make release
+
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_NAME: ${{ github.event.inputs.tag }}
+          RELEASE_BODY: |
+            This is an automated release created by GitHub Actions.
+            For more information, see the [release notes](https://github.com/sounishnath003/salesreport-generation-go/releases).
+          DRAFT: false
+          PRERELEASE: false

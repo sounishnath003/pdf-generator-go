@@ -1,5 +1,4 @@
-
-.PHONY: build run install-deps test-pdfgen
+.PHONY: build run install-deps test-pdfgen release
 
 install-deps:
 	which modd || go install github.com/cortesi/modd/cmd/modd@latest
@@ -17,4 +16,7 @@ run: build
 test-pdfgen:
 	rm -f output.pdf
 	/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --headless --disable-gpu --print-to-pdf http://localhost:3000/generate-report
-	# sed '/^{{/d' public/generate-report.html > templates/layout.html.templ
+
+release: build
+	goreleaser --parallelism 1 --rm-dist --skip-validate
+	echo "Release process not implemented yet"
