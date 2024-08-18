@@ -12,12 +12,21 @@ type HeaderInfo struct {
 	Heading3 string `json:"heading_3"`
 }
 
+type MananiProduct struct {
+	ID          int8   `json:"id"`
+	ProductName string `json:"productName"`
+	Quantity    int    `json:"quantity"`
+	Price       int    `json:"price"`
+}
+
 type ReportGenerationModel struct {
-	Date           string     `json:"date"`
-	Name           string     `json:"name"`
-	ShopName       string     `json:"shopName"`
-	CashCreditBank string     `json:"cashCreditBank"`
-	Heading        HeaderInfo `json:"headerInfo"`
-	PercentageLess int8       `json:"percentageLess"`
-	AuthorName     string     `json:"authorName"`
+	Date           string          `json:"date"`
+	Name           string          `json:"name"`
+	ShopName       string          `json:"shopName"`
+	CashCreditBank string          `json:"cashCreditBank"`
+	Heading        HeaderInfo      `json:"headerInfo"`
+	PercentageLess int8            `json:"percentageLess"`
+	Products       []MananiProduct `json:"products"`
+	TotalAmount    int             `json:"totalAmount"`
+	AuthorName     string          `json:"authorName"`
 }

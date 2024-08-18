@@ -23,7 +23,7 @@ func NewTemplateRender(e *echo.Echo, paths ...string) {
 
 	// Process the variadic passes in the arguments paths
 	for _, path := range paths {
-		template.Must(tmpl.ParseGlob(path))
+		template.Must(tmpl.Funcs(template.FuncMap{"mul": Mul, "sum": Sum}).ParseGlob(path))
 	}
 
 	t := newTemplate(tmpl)
@@ -35,4 +35,21 @@ func newTemplate(tmpl *template.Template) echo.Renderer {
 	return &Template{
 		Templates: tmpl,
 	}
+}
+
+// ParseAndRetrieveTemplFile parses and retrieves a template file.
+func ParseAndRetrieveTemplFile(filePath string) *template.Template {
+	return template.Must(template.ParseFiles(filePath))
+}
+
+func Mul(val1, val2 int) int {
+	return val1 * val2
+}
+
+func Sum(vals ...int) int {
+	t := 0
+	for e := range vals {
+		t += e
+	}
+	return t
 }

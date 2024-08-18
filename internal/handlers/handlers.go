@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"log"
 	"net/http"
 	"time"
 
@@ -19,8 +18,10 @@ func HandleIndexPage(ctx echo.Context) error {
 	return ctx.Render(http.StatusOK, data.Name, &data)
 }
 
+// var reportGenerationTempl = htmx.ParseAndRetrieveTemplFile("templates/layout.html.templ")
+
 func HandleReportGeneration(ctx echo.Context) error {
 	data := service.GenerateLatestSalesReport()
-	log.Println("latest.data", data)
+
 	return ctx.Render(http.StatusOK, data.Name, &data)
 }
