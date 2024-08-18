@@ -19,5 +19,6 @@ test-pdfgen:
 	/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --headless --disable-gpu --print-to-pdf http://localhost:3000/generate-report
 
 release:
+	rm -fr dist
 	goreleaser --parallelism 1 --clean --rm-dist --skip-validate
 	echo "Release process not implemented yet"
