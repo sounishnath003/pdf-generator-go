@@ -43,7 +43,7 @@ func main() {
 
 // Init initializes the necessary directory structure for public assets exports
 func Init() {
-	err := os.MkdirAll("temp", 0o755)
+	err := os.MkdirAll("temp", 0o777)
 	if err != nil {
 		panic(err)
 	}
